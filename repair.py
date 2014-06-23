@@ -21,7 +21,7 @@ class repair:
     
     ## List containing all repair tool's main strings. Later to be managed by
     ## multi-language tools.
-    clientStrings = ['Blue Money Bugdet Repair Tool', '0.0.4', './data/backup']
+    clientStrings = ['Blue Money Bugdet Repair Tool', '0.0.4b', './data/backup']
     ## List containing all essental directories, filetypes, and file names
     index = [['', 'py', 'BlueMoney', 'main', 'database', 'repair', 'notify', 'update', 'error'],['data/', 'csdv', 'bills', 'registry', 'items', 'recipies', 'budget'],['data/resources/']]
 

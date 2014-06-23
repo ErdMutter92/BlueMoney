@@ -87,7 +87,7 @@ class run(QMainWindow):
             Contains all the user actions for the Menubar and Toolbars
         """
         
-        ## Actions to take when user requests to exit the program. 'data/resources/stop32.png'
+        ## Actions to take when user requests to exit the program.
         self.exitAction = QAction(QIcon(''), 'Quit BlueMoney', self)
         self.exitAction.setShortcuts(['Ctrl+Q'])
         self.exitAction.setStatusTip("Exit the application...")
@@ -115,13 +115,13 @@ class run(QMainWindow):
 
         ## Action to take when user requests to submit feedback
         self.feedbackAction = QAction(QIcon(''), 'Submitt Feedback', self)
-        #self.updateAction.setShortcut('ctrl+shift+F')
+        self.updateAction.setShortcut('ctrl+shift+F')
         #self.updateAction.triggered.connect()
 
 
         ## Action to take when user requests to submit bug report
         self.bugreportAction = QAction(QIcon(''), 'Report Bug', self)
-        #self.bugreportAction.setShortcut('ctrl+shift+B')
+        self.bugreportAction.setShortcut('ctrl+shift+B')
 
 
         ## Action to take when user requests to submit suggestion
@@ -140,7 +140,6 @@ class run(QMainWindow):
         self.addStartAction = QAction(QIcon(''), 'Add Top Entry...', self)
         
         self.addAction.setShortcuts(['ctrl+shift+A', 'ctrl+1'])
-        #self.addStartAction.setShortcuts(['ctrl+shift+A', 'ctrl+1'])
         
         self.addAction.setStatusTip("Add a database entry to current document...")
         self.addStartAction.setStatusTip("Add a database entry to top of current document...")
@@ -204,6 +203,10 @@ class run(QMainWindow):
         self.shoppingListAction.triggered.connect(self.goToShoppingList)
 
 
+    """
+       Really need to find a better way to go between tabs then this.
+       This work arround makes it so user can't move tabs around...
+    """
     def goToBills(self):
         self.tabWidget.setCurrentWidget(self.tabWidget.widget(1))
     
@@ -397,7 +400,11 @@ class run(QMainWindow):
         return foundList
     
     def updateNotify(self):
-        updateNotify = notify('Update Notification', 'There is an update waiting for you! :)', 'BlueMoney Budget')
+        """
+           Not yet fully implimented. Currently contains a bug that makes mac os x
+           not able to see the app icon, need to fix this before implimenting.
+        """
+        updateNotify = notify('Update Notification', 'There is an update waiting for you!', 'BlueMoney Budget')
         updateNotify.push()
 
     def genToolbar(self):
@@ -431,10 +438,16 @@ class run(QMainWindow):
         self.toolbar.addWidget(self.searchBox)
     
     def debug(self):
+        """
+           function for testing code. Kept for future use.
+        """
         return True
     
     def removeListItem(self):
-        print(':)')
+        """
+           Yet to be implimented.
+        """
+        return True
     
     def genSignal(self):
         """
@@ -558,7 +571,8 @@ class run(QMainWindow):
             windowGap = self.toolbar.height()-40
             self.windowWidth = self.width()
             self.windowHeight = self.height()-windowGap-40
-        #self.tableWidget.setGeometry(0, windowGap, self.windowWidth, self.windowHeight)
+        ## Resizes the window acording to the variables above.
+        ## setGeometry(Top, Bottom, Width, Height)
         self.windowBody.setGeometry(0, windowGap, self.windowWidth, self.windowHeight)
 
 

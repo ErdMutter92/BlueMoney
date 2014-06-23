@@ -58,9 +58,6 @@ class firstrun():
         print('Reconstituting resource files...')
         if not os.path.exists('./data/resources'):
             os.mkdir('./data/resources')
-        #self.genFile('stop32', 'png')
-        #self.genFile('minus32', 'png')
-        #self.genFile('plus32', 'png')
         print('')
 
         print('First Run of Application Detected')
