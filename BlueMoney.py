@@ -5,20 +5,20 @@ from notify import *
 import sys, update, main, database, repair, firstrun
 
 class run(QMainWindow):
-    
-    main = main.loopback()
-    update = update.updater()
-    debug = True
 
-    appWidth = int('750')
-    appHeight = int('350')
-    lastSearch = ''
-    searchIndex = 0
-    lastSearchItem = ['']
-    
-    saved = Signal()
     
     def __init__(self):
+        main = main.loopback()
+        update = update.updater()
+        debug = True
+    
+        appWidth = int('750')
+        appHeight = int('350')
+        lastSearch = ''
+        searchIndex = 0
+        lastSearchItem = ['']
+    
+        saved = Signal()
         super(run, self).__init__()
         self.initUI()
         self.controls()
