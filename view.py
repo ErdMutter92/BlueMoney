@@ -26,7 +26,7 @@ class Window(QMainWindow):
         return self
     
     def __init__(self):
-        self.core = model.Model(self.getWindow())
+        self.core = control.Control(self.getWindow())
         super(Window, self).__init__()
         self.setUnifiedTitleAndToolBarOnMac(True)
         self.actions()

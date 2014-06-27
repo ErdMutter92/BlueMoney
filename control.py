@@ -6,7 +6,7 @@ import database
 import main
 import update
 
-class Model:
+class Control:
 
     lastSearch = ''
     main = main.loopback()
@@ -194,3 +194,4 @@ class Model:
             colCount = colCount+1
     
         self.view.tabWidget.widget(tableID).setHorizontalHeaderLabels(db[0])
+        self.controls()
