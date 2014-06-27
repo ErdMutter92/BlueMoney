@@ -1,4 +1,4 @@
-import model, view
+import control, view
 
 class BlueMoney:
     

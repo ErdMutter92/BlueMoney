@@ -2,7 +2,7 @@ from PySide.QtGui import *
 from PySide.QtCore import *
 from PySide.QtWebKit import *
 import sys
-import model
+import control
 
 class View:
     
@@ -38,7 +38,7 @@ class Window(QMainWindow):
         
         self.core.genTable(0)
         self.core.genTable(1)
-        self.core.genTable(2)
+        self.core.genSelectTable(self.tableRegistry, 2)
         self.core.genTable(3)
         self.core.genTable(4)
         
@@ -104,7 +104,6 @@ class Window(QMainWindow):
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.aboutUsAction)
         self.fileMenu.addAction(self.exitAction)
-    
         
     def initUI(self):
         self.tabWidget = QTabWidget(self)
@@ -113,11 +112,19 @@ class Window(QMainWindow):
         self.tableBudget = QTableWidget()
         self.tabWidget.addTab(self.tableBudget, 'Budget')
         
-        self.tableBills = QTableWidget()
-        self.tabWidget.addTab(self.tableBills, 'Bills')
+        self.billsWidget = QTableWidget()
+        self.tabWidget.addTab(self.billsWidget, 'Bills')
         
+        self.registryLayout = QVBoxLayout()
         self.tableRegistry = QTableWidget()
-        self.tabWidget.addTab(self.tableRegistry, 'Registry')
+        self.registryWidget = QWidget()
+        self.registryLayout.setSpacing(0)
+        self.registryLayout.setContentsMargins(QMargins(0,0,0,0))
+        self.test = QTableWidget()
+        self.registryLayout.addWidget(self.tableRegistry, 0, 0)
+        self.registryLayout.addWidget(self.test, 1, 0)
+        self.registryWidget.setLayout(self.registryLayout)
+        self.tabWidget.addTab(self.registryWidget, 'Registry')
         
         self.tableRecipies = QTableWidget()
         self.tabWidget.addTab(self.tableRecipies, 'Recipies')
@@ -164,3 +171,6 @@ class Window(QMainWindow):
         #self.connect(self.spacer1, SIGNAL('itemSelectionChanged()'), self.core.debug)
         #self.core.saved.connect(self.core.debug)
         return True
+
+
+

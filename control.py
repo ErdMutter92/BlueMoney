@@ -170,7 +170,30 @@ class Control:
             colCount = colCount+1
     
         self.view.tabWidget.currentWidget().setHorizontalHeaderLabels(db[0])
+    
+    def calcRow(self, ref):
+        return True
+    
+    def genSelectTable(self, ref, tableID):
+        tableTitle = self.view.tabWidget.tabText(tableID)
+        database1 = database.csdv(tableTitle)
+        db = database1.get()
         
+        ref.setColumnCount(int(len(db[0])))
+        ref.setRowCount(int(len(db[1:])))
+        
+        colCount = 0
+        for item in db[1:]:
+            rowCount = 0
+            for items in item:
+                itemsInput = QTableWidgetItem(str(items))
+                ref.setItem(colCount, rowCount, itemsInput)
+                rowCount = rowCount+1
+            colCount = colCount+1
+        
+        ref.setHorizontalHeaderLabels(db[0])
+        self.controls()
+    
     def genTable(self, tableID):
         
         ## return falsse if there is not widget at that id.
