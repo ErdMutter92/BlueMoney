@@ -18,5 +18,3 @@ class BlueMoney:
         error.report('Unknown Exception', e)
     except GeneratorExit as e:
         error.report('System Exit', e)
-    except:
-        error.report('Unknown Error', ':(')
