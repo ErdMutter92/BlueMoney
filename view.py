@@ -130,14 +130,13 @@ class Window(QMainWindow):
         self.tableRegistry = QTableWidget()
         self.tabWidget.addTab(self.tableRegistry, 'Registry')
         
-        ## Recipies Area
-        self.tableRecipies = QTableWidget()
-        self.tabWidget.addTab(self.tableRecipies, 'Recipies')
-        
         ## Items Area
         self.tableItems = QTableWidget()
         self.tabWidget.addTab(self.tableItems, 'Items')
-
+        
+        ## Recipies Area
+        self.tableRecipies = QTableWidget()
+        self.tabWidget.addTab(self.tableRecipies, 'Recipies')
         self.mainLayout.addWidget(self.tabWidget)
         
         self.show()
