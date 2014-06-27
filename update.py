@@ -25,7 +25,7 @@ class updater:
             """
         fileMD5 = hashlib.md5('')
         ## Passes the url argument to be opened by urlib
-        serverIndex = urlopen(self.updateConfig[2]+'index.php?update')
+        serverIndex = open('./data/resources/repair.index.html', 'r+')
         ## reads the opened urllib object, strips out any new line characitors
         ## and decodes it back into readable text (default: utf-8)
         serverIndex = serverIndex.read().rstrip().decode('utf-8').split('<br />')
@@ -141,6 +141,6 @@ class updater:
         else:
             return False
 
-if __name__ == '__main__':
-    update = updater()
-    update.client()
+#if __name__ == '__main__':
+#    update = updater()
+#    update.client()
