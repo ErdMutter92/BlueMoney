@@ -19,7 +19,7 @@ class loopback:
     bills = database.csdv('bills')
     registry = database.csdv('registry')
     
-    clientConfig = ['Blue Money Buget', 'v0.0.4d']
+    clientConfig = ['Blue Money Buget', 'v0.0.4e']
     
     def gui(self):
         subprocess.call(["python", "gui.py"])
