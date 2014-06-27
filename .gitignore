@@ -1,3 +1,5 @@
 /dist/*
 /build/*
 /Bundling Files/*
+*.pyc
+/data/*.csdv
