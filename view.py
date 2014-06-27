@@ -174,6 +174,8 @@ class Window(QMainWindow):
         self.connect(self.tabWidget.widget(0), SIGNAL('itemSelectionChanged()'), self.core.save)
         self.connect(self.tabWidget.widget(1), SIGNAL('itemSelectionChanged()'), self.core.save)
         self.connect(self.tabWidget.widget(2), SIGNAL('itemSelectionChanged()'), self.core.save)
+        self.connect(self.tabWidget.widget(3), SIGNAL('itemSelectionChanged()'), self.core.save)
+        self.connect(self.tabWidget.widget(4), SIGNAL('itemSelectionChanged()'), self.core.save)
         self.connect(self.searchBox, SIGNAL('returnPressed()'), self.core.search)
         self.connect(self.tabWidget, SIGNAL('currentChanged(int)'), self.core.controls)
         #self.connect(self.spacer1, SIGNAL('itemSelectionChanged()'), self.core.debug)
