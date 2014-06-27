@@ -10,7 +10,7 @@ class View:
         app = QApplication(sys.argv)
         main = Window()
         main.setWindowTitle('Blue Money Budget')
-        sys.exit(app.exec_()) 
+        sys.exit(app.exec_())
         
 class Window(QMainWindow):
     """
@@ -50,11 +50,16 @@ class Window(QMainWindow):
         self.exitAction.setShortcuts(['Ctrl+Q'])
         self.exitAction.triggered.connect(self.core.exit)
         self.exitAction.setIconVisibleInMenu(False)
-
+        
         self.addAction = QAction(QIcon(''), 'Add Entry', self)
         self.addAction.setShortcuts(['Ctrl+A'])
         self.addAction.triggered.connect(self.core.add)
         self.addAction.setIconVisibleInMenu(False)
+        
+        self.addTopAction = QAction(QIcon(''), 'Add Entry to Top', self)
+        self.addTopAction.setShortcuts(['Ctrl+Shift+A'])
+        self.addTopAction.triggered.connect(self.core.addTop)
+        self.addTopAction.setIconVisibleInMenu(False)
 
         self.removeAction = QAction(QIcon(''), 'Remove Entry', self)
         self.removeAction.setShortcuts(['Ctrl+R'])
@@ -103,9 +108,12 @@ class Window(QMainWindow):
         #self.fileMenu.addSeparator()
         
         self.fileMenu.addAction(self.saveAction)
-        self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.aboutUsAction)
         self.fileMenu.addAction(self.exitAction)
+        self.fileMenu.addSeparator()
+    
+        self.fileMenu.addAction(self.addAction)
+        self.fileMenu.addAction(self.addTopAction)
         
     def initUI(self):
         
