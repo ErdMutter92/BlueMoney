@@ -3,3 +3,4 @@
 /Bundling Files/*
 *.pyc
 /data/*.csdv
+/data/firstrun
