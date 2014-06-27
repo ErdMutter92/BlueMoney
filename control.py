@@ -185,7 +185,7 @@ class Control:
                         if deposit == None or deposit == '':
                             deposit = str(0)
                     if rowCount == 5:
-                        lastBalance = str(float(float(deposit)-float(payment)+float(lastBalance)))
+                        lastBalance = str(float(float(deposit)-abs(float(payment))+float(lastBalance)))
                         item = QTableWidgetItem(str(lastBalance))
                         ## Item is no longer editable by user.
                         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
