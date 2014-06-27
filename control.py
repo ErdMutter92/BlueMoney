@@ -186,7 +186,10 @@ class Control:
                             deposit = str(0)
                     if rowCount == 5:
                         lastBalance = str(float(float(deposit)-float(payment)+float(lastBalance)))
-                        self.view.tabWidget.widget(tableID).setItem(colCount, rowCount, QTableWidgetItem(str(lastBalance)))
+                        item = QTableWidgetItem(str(lastBalance))
+                        ## Item is no longer editable by user.
+                        item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
+                        self.view.tabWidget.widget(tableID).setItem(colCount, rowCount, item)
                     else:
                         self.view.tabWidget.widget(tableID).setItem(colCount, rowCount, itemsInput)
                     rowCount = rowCount+1
