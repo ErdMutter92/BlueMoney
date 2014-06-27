@@ -35,7 +35,7 @@ class csdv:
             if fileExists:
                 ## reading the file to get the headers.
                 with open(fileName) as csvfile:
-                    filereader = csv.reader(csvfile, delimiter=',', quotechar='|')
+                    filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
                     fileheader = []
                     for row in filereader:
                         fileheader.append(row)
@@ -44,7 +44,7 @@ class csdv:
                 
                 ## opening the file in append mode to make additions.
                 with open(fileName, 'a') as csvfile:
-                    filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    filewriter = csv.writer(csvfile, delimiter='\t', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     if len(fileheader[0]) == len(dataList):
                             filewriter.writerow(dataList)
                     else:
@@ -66,7 +66,7 @@ class csdv:
             if fileExists:
                 ## reading the file to get the headers.
                 with open(fileName) as csvfile:
-                    filereader = csv.reader(csvfile, delimiter=',', quotechar='|')
+                    filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
                     fileheader = []
                     for row in filereader:
                         fileheader.append(row)
@@ -75,7 +75,7 @@ class csdv:
             
                 ## opening the file in append mode to make additions.
                 with open(fileName, 'w') as csvfile:
-                    filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    filewriter = csv.writer(csvfile, delimiter='\t', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     if len(fileheader[0]) == len(dataList[-1]):
                         for data in dataList:
                             filewriter.writerow(data)
@@ -113,14 +113,14 @@ class csdv:
             returnList = []
             if os.path.exists(fileName):
                 with open(fileName) as csvfile:
-                    filereader = csv.reader(csvfile, delimiter=',', quotechar='|')
+                    filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
                     for row in filereader:
-                        returnList.append(', '.join(row).split(', '))
+                        returnList.append('\t'.join(row).split('\t'))
                     self.dbList = returnList
             return returnList
         else:
             for item in self.get():
-                if verbose: print(', '.join(item));
+                if verbose: print('\t '.join(item));
             return self.dbList
 
     def get(self):

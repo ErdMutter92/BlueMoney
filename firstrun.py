@@ -63,11 +63,11 @@ class Firstrun():
         if not os.path.exists(self.dataDir+'/data'):
             os.mkdir(self.dataDir+'/data')
         
-        self.mkCSDV('bills', 'Description,Amount,Frequency,Last Payed')
-        self.mkCSDV('budget', 'Discription,Alowance,Amount to Date')
-        self.mkCSDV('registry', 'Check #,date,transaction,payment,deposit,balance')
-        self.mkCSDV('items', 'NULL')
-        self.mkCSDV('recipies', 'NULL')
+        self.mkCSDV('bills', 'Descriptiodnmount\tFrequency\tLast Payed')
+        self.mkCSDV('budget', 'Discription\tAllowance\tAmount to Date')
+        self.mkCSDV('registry', 'Check #\tDate\tTransaction\tPayment\tDeposit\tBalance')
+        self.mkCSDV('items', 'Item Name\tItem Discription\tCateogry\tPrice\tLocation')
+        self.mkCSDV('recipies', 'Title\tDiscription\tCateogry\tItems')
         print('')
         
         print('Reconstituting resource files...')
