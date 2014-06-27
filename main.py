@@ -11,7 +11,7 @@
     prompting for user input of commands until the exit command is given.
     
 """
-import database, repair, update, error
+import database
 import sys, shlex, os, subprocess
 
 class loopback:
@@ -19,7 +19,7 @@ class loopback:
     bills = database.csdv('bills')
     registry = database.csdv('registry')
     
-    clientConfig = ['Blue Money Buget', 'v0.0.4b']
+    clientConfig = ['Blue Money Buget', 'v0.0.4c']
     
     def gui(self):
         subprocess.call(["python", "gui.py"])
