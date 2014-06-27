@@ -97,13 +97,18 @@ class Control:
             msgBox = QMessageBox.information(self.view, 'No Items Found', 'We were unable to find any items on this page with "'+searchBoxInput+'" in them.')
     
         return foundList
-        
+    
     def add(self):
         rowCount = self.view.tabWidget.currentWidget().rowCount()
         self.view.tabWidget.currentWidget().insertRow(rowCount)
         self.save()
         self.generate()
-        
+    
+    def addTop(self):
+        self.view.tabWidget.currentWidget().insertRow(0)
+        self.save()
+        self.generate()
+    
     def remove(self):
         ok = QMessageBox.question(self.view, 'Remove Dialog', 'You sure you want to delete this row? It can\'t be undone!', QMessageBox.Yes, QMessageBox.Abort)
         if ok == QMessageBox.Yes:
