@@ -52,7 +52,7 @@ class Control:
             database1 = database.csdv(tableTitle)
             db = database1.get()
             database1.saveOver(tableTitle, self.updateDB(self.view.tabWidget.currentIndex()))
-            self.genCurrentTable()
+            self.generate()
     
     def search(self):
         '''
@@ -102,7 +102,7 @@ class Control:
         rowCount = self.view.tabWidget.currentWidget().rowCount()
         self.view.tabWidget.currentWidget().insertRow(rowCount)
         self.save()
-        self.genCurrentTable()
+        self.generate()
         
     def remove(self):
         ok = QMessageBox.question(self.view, 'Remove Dialog', 'You sure you want to delete this row? It can\'t be undone!', QMessageBox.Yes, QMessageBox.Abort)
@@ -111,12 +111,13 @@ class Control:
             if int(currentRow) != int(-1):
                 self.view.tabWidget.currentWidget().removeRow(currentRow)
         self.save()
-        self.genCurrentTable()
+        self.generate()
         
     def controls(self):
         """
         Used to control element settings
         """
+        tableID = self.view.tabWidget.tabText(self.view.tabWidget.currentIndex())
         if isinstance(self.view.tabWidget.currentWidget(), QTableWidget):
             self.view.addAction.setEnabled(True)
             if self.view.tabWidget.currentWidget().rowCount() == 0:
@@ -151,7 +152,51 @@ class Control:
             constructList.append(constructInner)
         constructList.insert(0, dbHeaders)
         return constructList
-    
+
+    def generate(self):
+        tableName = self.view.tabWidget.tabText(self.view.tabWidget.currentIndex())
+        tableID = self.view.tabWidget.currentIndex()
+        if tableName == 'Registry':
+            ## return falsse if there is not widget at that id.
+            if not self.view.tabWidget.widget(tableID):
+                return False
+            
+            tableTitle = self.view.tabWidget.tabText(tableID)
+            database1 = database.csdv(tableTitle)
+            db = database1.get()
+            
+            self.view.tabWidget.widget(tableID).setColumnCount(int(len(db[0])))
+            self.view.tabWidget.widget(tableID).setRowCount(int(len(db[1:])))
+            
+            colCount = 0
+            lastBalance = '0'
+            for item in db[1:]:
+                rowCount = 0
+                payment = '0'
+                deposit = '0'
+                for items in item:
+                    itemsInput = QTableWidgetItem(str(items))
+                    if rowCount == 3:
+                        payment = str(items)
+                        if payment == None or payment == '':
+                            payment = str(0)
+                    if rowCount == 4:
+                        deposit = str(items)
+                        if deposit == None or deposit == '':
+                            deposit = str(0)
+                    if rowCount == 5:
+                        lastBalance = str(float(float(deposit)-float(payment)+float(lastBalance)))
+                        self.view.tabWidget.widget(tableID).setItem(colCount, rowCount, QTableWidgetItem(str(lastBalance)))
+                    else:
+                        self.view.tabWidget.widget(tableID).setItem(colCount, rowCount, itemsInput)
+                    rowCount = rowCount+1
+                colCount = colCount+1
+            
+            self.view.tabWidget.widget(tableID).setHorizontalHeaderLabels(db[0])
+            self.controls()
+        else:
+            self.genCurrentTable()
+
     def genCurrentTable(self):
         tableTitle = self.view.tabWidget.tabText(self.view.tabWidget.currentIndex())
         database1 = database.csdv(tableTitle)
@@ -174,25 +219,8 @@ class Control:
     def calcRow(self, ref):
         return True
     
-    def genSelectTable(self, ref, tableID):
-        tableTitle = self.view.tabWidget.tabText(tableID)
-        database1 = database.csdv(tableTitle)
-        db = database1.get()
-        
-        ref.setColumnCount(int(len(db[0])))
-        ref.setRowCount(int(len(db[1:])))
-        
-        colCount = 0
-        for item in db[1:]:
-            rowCount = 0
-            for items in item:
-                itemsInput = QTableWidgetItem(str(items))
-                ref.setItem(colCount, rowCount, itemsInput)
-                rowCount = rowCount+1
-            colCount = colCount+1
-        
-        ref.setHorizontalHeaderLabels(db[0])
-        self.controls()
+    def debug(self):
+        print('debugging')
     
     def genTable(self, tableID):
         

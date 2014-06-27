@@ -33,14 +33,16 @@ class Window(QMainWindow):
         self.toolBar()
         self.menubar()
         self.initUI()
-        self.genSignal()
         self.setGeometry(150, 200, 800, 400)
         
         self.core.genTable(0)
         self.core.genTable(1)
-        self.core.genSelectTable(self.tableRegistry, 2)
+        self.core.genTable(2)
         self.core.genTable(3)
         self.core.genTable(4)
+    
+    
+        self.genSignal()
         
         
     def actions(self):
@@ -88,8 +90,8 @@ class Window(QMainWindow):
         
         self.toolbar = self.addToolBar('Main Toolbar')
 
-        self.toolbar.addAction(self.addAction)
-        self.toolbar.addAction(self.removeAction)
+        self.tbAdd = self.toolbar.addAction(self.addAction)
+        self.tbRemove = self.toolbar.addAction(self.removeAction)
         
         self.toolbar.addWidget(self.spacer)
         self.toolbar.addWidget(self.searchBox)
@@ -106,31 +108,37 @@ class Window(QMainWindow):
         self.fileMenu.addAction(self.exitAction)
         
     def initUI(self):
-        self.tabWidget = QTabWidget(self)
+        
+        self.mainLayout = QVBoxLayout()
+        self.mainArea = QWidget(self)
+        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+        self.mainLayout.setSpacing(0)
+        self.mainArea.setLayout(self.mainLayout)
+        
+        self.tabWidget = QTabWidget()
         self.tabWidget.setDocumentMode(True)
         
+        ## Budget Area
         self.tableBudget = QTableWidget()
         self.tabWidget.addTab(self.tableBudget, 'Budget')
         
+        ## Bills Area
         self.billsWidget = QTableWidget()
         self.tabWidget.addTab(self.billsWidget, 'Bills')
         
-        self.registryLayout = QVBoxLayout()
+        ## Registry Area
         self.tableRegistry = QTableWidget()
-        self.registryWidget = QWidget()
-        self.registryLayout.setSpacing(0)
-        self.registryLayout.setContentsMargins(QMargins(0,0,0,0))
-        self.test = QTableWidget()
-        self.registryLayout.addWidget(self.tableRegistry, 0, 0)
-        self.registryLayout.addWidget(self.test, 1, 0)
-        self.registryWidget.setLayout(self.registryLayout)
-        self.tabWidget.addTab(self.registryWidget, 'Registry')
+        self.tabWidget.addTab(self.tableRegistry, 'Registry')
         
+        ## Recipies Area
         self.tableRecipies = QTableWidget()
         self.tabWidget.addTab(self.tableRecipies, 'Recipies')
         
+        ## Items Area
         self.tableItems = QTableWidget()
         self.tabWidget.addTab(self.tableItems, 'Items')
+
+        self.mainLayout.addWidget(self.tabWidget)
         
         self.show()
         
@@ -158,14 +166,15 @@ class Window(QMainWindow):
             self.windowHeight = self.height()-windowGap-40
         ## Resizes the window acording to the variables above.
         ## setGeometry(Top, Bottom, Width, Height)
-        self.tabWidget.setGeometry(0, windowGap, self.windowWidth, self.windowHeight)
+        self.mainArea.setGeometry(0, windowGap, self.windowWidth, self.windowHeight)
         
     def genSignal(self):
         """
             Contains all of the signals to keep track off
-        """
+            """
         self.connect(self.tabWidget.widget(0), SIGNAL('itemSelectionChanged()'), self.core.save)
         self.connect(self.tabWidget.widget(1), SIGNAL('itemSelectionChanged()'), self.core.save)
+        self.connect(self.tabWidget.widget(2), SIGNAL('itemSelectionChanged()'), self.core.save)
         self.connect(self.searchBox, SIGNAL('returnPressed()'), self.core.search)
         self.connect(self.tabWidget, SIGNAL('currentChanged(int)'), self.core.controls)
         #self.connect(self.spacer1, SIGNAL('itemSelectionChanged()'), self.core.debug)
