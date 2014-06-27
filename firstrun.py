@@ -63,9 +63,9 @@ class Firstrun():
         if not os.path.exists(self.dataDir+'/data'):
             os.mkdir(self.dataDir+'/data')
         
-        self.mkCSDV('bills', 'Descriptiodnmount\tFrequency\tLast Payed')
+        self.mkCSDV('bills', 'Discription\tAmount\tFrequency\tLast Payed')
         self.mkCSDV('budget', 'Discription\tAllowance\tAmount to Date')
-        self.mkCSDV('registry', 'Check #\tDate\tTransaction\tPayment\tDeposit\tBalance')
+        self.mkCSDV('registry', 'Date\tTransaction\tAccount\tDebit\tCredit\tBalance')
         self.mkCSDV('items', 'Item Name\tItem Discription\tCateogry\tPrice\tLocation')
         self.mkCSDV('recipies', 'Title\tDiscription\tCateogry\tItems')
         print('')
